@@ -1,0 +1,29 @@
+
+server:
+  compression:
+    enabled: true
+  http2:
+    enabled: true
+  port: 9090
+  servlet:
+    context-path: /
+
+management:
+  health:
+    pubsub:
+      enabled: false
+  endpoints:
+    loggers:
+      enabled: true
+    health:
+      show-details: always
+    web:
+      exposure:
+        include: info, health, metrics, mappings, httptrace, loggers, configprops, threaddump
+
+spring:
+  jpa:
+    open-in-view: false
+
+logging:
+    config: ./log4j2.properties

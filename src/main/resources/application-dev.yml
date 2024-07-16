@@ -1,0 +1,122 @@
+info:
+  app:
+    description: Inbound base repo for MAWM Interface development
+    name: Inbound
+    version: ${project.version}
+logging:
+  level:
+    ROOT: info
+    org:
+      springframework:
+        integration: INFO
+mif:
+  isEnabled: true
+  host:
+  password:
+  username:
+sftp:
+  inbound:
+    host: 127.0.0.1 #159.65.145.21 #127.0.0.1
+    port: 2222 #2222
+    username: foo #546df7ccac684d48b4a85ac5f230fb2b #test
+    password: pass #X1EVUTS0QJogaujmaSAGyXiFuazscFzM #test123
+  outbound:
+    host: 127.0.0.1 #159.65.145.21 #127.0.0.1
+    port: 2222 #2222
+    username: foo #546df7ccac684d48b4a85ac5f230fb2b #test
+    password: pass #X1EVUTS0QJogaujmaSAGyXiFuazscFzM #test123
+
+activemq:
+  inbound:
+    broker-url:
+    password:
+    username:
+
+spring:
+  application:
+    name: PO-Inbound
+  jms:
+    servicebus:
+      enabled: false
+  cloud:
+    gcp:
+      core:
+        enabled: false
+      pubsub:
+        enabled: false
+  datasource:
+    properties:
+      requireSecureTransport: ON
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mawmintegration?createDatabaseIfNotExist=true
+    username: root
+    password: password
+    schema-initialize: true
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: none
+
+props:
+  entityCreateEvent:
+    item:
+      enabled: true
+      queue: EntityCreated
+  infiniteSupply:
+    skuTypes: PO
+
+
+purge:
+  sftp:
+    enabled: true
+    retentionDays: 60
+    folderIdentifier:
+      - output
+  retentions:
+    item: 5
+
+mawm:
+  auth:
+    useBase: false
+    authorization: Basic b21uaWNvbXBvbmVudC4xLjAuMDpiNHM4cmdUeWc1NVhZTnVu
+    endPoint: /oauth/token
+    grantType: password
+    isEncrypted: false
+    password:
+    refreshFrequency: 1800000
+    refreshRequired: false
+    url:
+    username:
+  enabled: false
+  log-level: BASIC
+  orgId: FnDDevelopment-US
+  retry:
+    httpMaxRetryAttempts: 3
+    httpRetryInterval: 1000
+    retryRequired: false
+  timeout:
+    connection: 5000
+    read: 8000
+  url:
+
+jobs:
+  po:
+    job-name: item
+    type: BATCH
+    isEnabled: true
+    root-directory: /upload
+    drop-directory: /drop
+    chunk-size: 100
+    file-pattern: '*PO-*.csv'
+    maxFilesPerPoll: 3
+    pollFrequencyInSecond: 5
+    destination:
+      dest-type: SFTP
+      paths:
+        po:
+          path: /upload/MMMS_Po
+      queues:
+        mms-item:
+          name: INB_ImportItem_GCPQ
+          headers:
+            MSG_TYPE: INB_PO

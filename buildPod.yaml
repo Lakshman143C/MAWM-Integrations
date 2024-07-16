@@ -1,0 +1,76 @@
+#Make sure each container has consistent config values -- same order image, name, etc
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    label: builder
+  annotations:
+    container.apparmor.security.beta.kubernetes.io/buildkit: unconfined
+    container.seccomp.security.alpha.kubernetes.io/buildkit: unconfined
+spec:
+  initContainers:
+    - name: chdir
+      image: busybox:latest
+      command: [ "sh", "-c", "chmod 777 /cache" ]
+      volumeMounts:
+        - mountPath: /cache
+          name: docker-cache
+
+  containers:
+    - command:
+        - cat
+      image: fdazregistry.azurecr.io/floordecor/builders/git-version:0.0.6
+      imagePullPolicy: IfNotPresent
+      name: gitversion
+      securityContext:
+        privileged: false
+      tty: true
+
+    - command:
+        - cat
+      image: fdazregistry.azurecr.io/floordecor/builders/maven:0.0.5
+      imagePullPolicy: Always
+      name: maven
+      securityContext:
+        privileged: false
+      tty: true
+      volumeMounts:
+        - mountPath: /var/jenkins/maven/.m2
+          name: maven-dependencies
+
+    - command:
+      - sleep
+      args:
+        - 999999
+      image: fdazregistry.azurecr.io/floordecor/builders/buildkit-make-rootless:0.0.3
+      name: buildkit
+      securityContext:
+        privileged: true
+      volumeMounts:
+        - mountPath: /home/user/.docker
+          name: docker-credentials-path
+        - mountPath: /cache
+          name: docker-cache
+
+    - command:
+      - sleep
+      args:
+        - '999s'
+      name: sonar
+      image: fdazregistry.azurecr.io/floordecor/builders/sonarqube:0.0.1
+      imagePullPolicy: IfNotPresent
+
+  volumes:
+    - name: docker-credentials-path
+      secret:
+        defaultMode: 420
+        secretName: azure-registry-credentials-opaque
+    - hostPath:
+        path: /var/jenkins/maven/.m2
+        type: DirectoryOrCreate
+      name: maven-dependencies
+    - hostPath:
+        path: /tmp/docker/cache
+        type: DirectoryOrCreate
+      name: docker-cache
+
