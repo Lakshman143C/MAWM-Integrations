@@ -1,0 +1,135 @@
+info:
+  app:
+    description: Inbound base repo for MAWM Interface development
+    name: Inbound
+    version: ${project.version}
+logging:
+  level:
+    ROOT: INFO
+    org:
+      springframework:
+        integration: INFO
+
+activemq:
+  inbound:
+    broker-url: tcp://localhost:61616
+    password: artemis
+    username: artemis
+
+mif:
+  isEnabled: false
+  host:
+  password: manage
+  username: Administrator
+sftp:
+  inbound:
+    host: 127.0.0.1
+    port: 22
+    username: test
+    password:
+  outbound:
+    host: 127.0.0.1
+    port: 2222
+    username: test
+    password: test123
+
+
+spring:
+  application:
+    name: ItemInbound
+  jms:
+    servicebus:
+      enabled: false
+  cloud:
+    gcp:
+      core:
+        enabled: false
+      pubsub:
+        enabled: false
+#  quartz:
+#    job:
+#      initialize-on-prop: true
+#
+#    enabled: true
+#    schema-initialize: true
+#    auto-startup: true
+#    scheduler-name: ItemInboundScheduler
+#    job-store-type: jdbc
+#    overwrite-existing-jobs: true
+#    properties.org.quartz:
+#      jobStore:
+#        driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+#        isClustered: true
+#        clusterCheckinInterval: 2000
+#        tablePrefix: QRTZ_
+#        misfireThreshold: 500
+#        useProperties: true
+#      scheduler:
+#        skipUpdateCheck: true
+#        instanceId: ItemInboundInstance
+#    jdbc:
+#      initialize-schema: never
+#  batch:
+#    jdbc:
+#      initialize-schema: never
+#      isolation-level-for-create: default
+#      schema: classpath:/org/springframework/batch/core/schema-mysql.sql
+#    job:
+#      enabled: false
+
+  datasource:
+    properties:
+      requireSecureTransport: ON
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mawmintegration?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: password
+    schema-initialize: true
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: none
+
+props:
+  minimumLTLDeliverSize: 72
+  minimumLTLTransferSize: 96
+  skipItemLocationSkuStatus: I,V
+  entityCreateEvent:
+    item:
+      enabled: true
+      queue: EntityCreated
+  infiniteSupply:
+    skuTypes: PO
+
+purge:
+  sftp:
+    enabled: true
+    retentionDays: 60
+    folderIdentifier:
+      - output
+  retentions:
+    item: 5
+
+mawm:
+  auth:
+    useBase: true
+    authorization: Basic b21uaWNvbXBvbmVudC4xLjAuMDpiNHM4cmdUeWc1NVhZTnVu
+    endPoint: /oauth/token
+    grantType: password
+    isEncrypted: false
+    password:
+    refreshFrequency: 1800000
+    refreshRequired: true
+    url:
+    username:
+  enabled: true
+  log-level: BASIC
+  orgId:
+  retry:
+    httpMaxRetryAttempts: 3
+    httpRetryInterval: 1000
+    retryRequired: true
+  timeout:
+    connection: 5000
+    read: 8000
+  url:

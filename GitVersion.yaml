@@ -1,0 +1,13 @@
+assembly-versioning-scheme: MajorMinorPatch
+mode: Mainline
+major-version-bump-message: '\+semver:\s?(breaking|major)'
+minor-version-bump-message: '\+semver:\s?(feature|minor)'
+patch-version-bump-message: '\+semver:\s?(fix|patch)'
+no-bump-message: '\+semver:\s?(none|skip)'
+commit-message-incrementing: Enabled
+ignore:
+  sha: []
+increment: Inherit
+commit-date-format: dd-MM-yyyy
+merge-message-formats: {}
+

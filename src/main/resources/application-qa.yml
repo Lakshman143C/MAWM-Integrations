@@ -1,0 +1,127 @@
+info:
+  app:
+    description: Inbound base repo for MAWM Interface development
+    name: Inbound
+    version: ${project.version}
+logging:
+  level:
+    ROOT: INFO
+mif:
+  isEnabled: true
+  host:
+  password:
+  username:
+
+sftp:
+  inbound:
+    host:
+    port: 22
+    username:
+    password:
+
+activemq:
+  inbound:
+    broker-url:
+    password:
+    username:
+
+spring:
+  application:
+    name: ItemInbound
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+  jms:
+    servicebus:
+      enabled: false
+  cloud:
+    gcp:
+      core:
+        enabled: false
+      pubsub:
+        enabled: false
+#  quartz:
+#    job:
+#      initialize-on-prop: true
+#    enabled: true
+#    schema-initialize: true
+#    auto-startup: true
+#    scheduler-name: ItemInboundScheduler
+#    job-store-type: jdbc
+#    overwrite-existing-jobs: true
+#    properties.org.quartz:
+#      jobStore:
+#        driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+#        isClustered: true
+#        clusterCheckinInterval: 2000
+#        tablePrefix: QRTZ_
+#        misfireThreshold: 500
+#        useProperties: true
+#      scheduler:
+#        skipUpdateCheck: true
+#        instanceId: ItemInboundInstance
+#    jdbc:
+#      initialize-schema: never
+#  batch:
+#    jdbc:
+#      initialize-schema: never
+#      isolation-level-for-create: default
+#      schema: classpath:/org/springframework/batch/core/schema-mysql.sql
+#    job:
+#      enabled: false
+  datasource:
+    properties:
+      requireSecureTransport: ON
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url:
+    username:
+    password:
+    schema-initialize: true
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: none
+
+props:
+  minimumLTLDeliverSize: 72
+  minimumLTLTransferSize: 96
+  skipItemLocationSkuStatus: I
+  entityCreateEvent:
+    item:
+      enabled: true
+      queue: EntityCreated
+  infiniteSupply:
+    skuTypes: PO
+
+mawm:
+  auth:
+    useBase: true
+    authorization: Basic b21uaWNvbXBvbmVudC4xLjAuMDpiNHM4cmdUeWc1NVhZTnVu
+    endPoint: /oauth/token
+    grantType: password
+    isEncrypted: false
+    password:
+    refreshFrequency: 1800000
+    refreshRequired: true
+    url:
+    username:
+  enabled: true
+  log-level: BASIC
+  orgId:
+  retry:
+    httpMaxRetryAttempts: 3
+    httpRetryInterval: 1000
+    retryRequired: true
+  timeout:
+    connection: 5000
+    read: 8000
+  url:
+
+purge:
+  sftp:
+    enabled: true
+    retentionDays: 30
+    folderIdentifier:
+      - output
+  retentions:
+    item: 30
