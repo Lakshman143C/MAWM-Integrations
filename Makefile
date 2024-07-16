@@ -1,6 +1,6 @@
 #Potentially use make file to hide implementation of build/test/deploy/etc from jenkins
 #So that Jenkinsfile can be generic enough to fit any project
-PROJECT_NAME = item-inbound
+PROJECT_NAME = inbound
 IMAGE_REGISTRY = fdazregistry.azurecr.io
 IMAGE_REPOSITORY = floordecor/inbound
 IMAGE_NAME = "inbound"

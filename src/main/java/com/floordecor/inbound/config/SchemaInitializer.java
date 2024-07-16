@@ -22,7 +22,7 @@ public class SchemaInitializer {
 
     @PostConstruct()
     @Order(Ordered.HIGHEST_PRECEDENCE)
-    public void itemDataSourceInitializer() {
+    public void dataSourceInitializer() {
         ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator();
         resourceDatabasePopulator.addScript(new ClassPathResource("schema/batch-schema.sql"));
         resourceDatabasePopulator.addScript(new ClassPathResource("schema/schema.sql"));

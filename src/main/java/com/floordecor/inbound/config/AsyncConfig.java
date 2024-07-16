@@ -9,6 +9,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 import java.util.concurrent.ThreadPoolExecutor;
+
 @Configuration
 public class AsyncConfig {
     @Bean
@@ -63,7 +64,7 @@ public class AsyncConfig {
     @Bean(name = "ruleProcessTaskExecutor")
     public TaskExecutor ruleProcessTaskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setThreadNamePrefix("Item-Rule::");
+        executor.setThreadNamePrefix("Rule::");
         executor.setCorePoolSize(75);
         executor.setMaxPoolSize(100);
         executor.setQueueCapacity(75);

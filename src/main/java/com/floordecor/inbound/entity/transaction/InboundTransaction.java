@@ -2,16 +2,17 @@ package com.floordecor.inbound.entity.transaction;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.floordecor.inbound.consts.EntityConstants;
 import com.floordecor.inbound.dto.enums.InterfaceTypes;
 import com.floordecor.inbound.dto.enums.Source;
 import com.floordecor.inbound.entity.TransactionStatus;
-import com.floordecor.inbound.dto.mms.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import com.floordecor.inbound.entity.base.BaseEntity;
 
 @Entity
-@Table(name = "inb_transaction_status")
+@Table(name = EntityConstants.INB_TRANSACTION_STATUS_TABLE)
 @Getter
 @Setter
 @NoArgsConstructor

@@ -41,6 +41,7 @@ spring:
 #  quartz:
 #    job:
 #      initialize-on-prop: true
+#      initialize-on-enums: true
 #
 #    enabled: true
 #    schema-initialize: true
