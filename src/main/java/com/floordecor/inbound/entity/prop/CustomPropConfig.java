@@ -1,5 +1,6 @@
 package com.floordecor.inbound.entity.prop;
 
+import com.floordecor.inbound.consts.EntityConstants;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,7 +10,7 @@ import lombok.*;
 @Entity
 @Builder
 @Table(
-        name = "Custom_Prop_Config",
+        name = EntityConstants.CUSTOM_PROP_CONFIG_TABLE,
         uniqueConstraints = {
             @UniqueConstraint(
                     name = "unique_ConfigId_Key",

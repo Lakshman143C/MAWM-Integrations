@@ -79,8 +79,8 @@ public class BRAsnProcessor {
     @Bean
     public ItemProcessor<Document, Asn> syncBRAsnProcessor(AsnMapper asnMapper) {
         return document -> {
-            Asn mawmAsn= asnMapper.toMAWMItem(ConversionProcess(document));
-            log.debug("Converted MAWM Item , {}", JsonUtils.convert(mawmAsn));
+            Asn mawmAsn= asnMapper.toMAWMAsn(ConversionProcess(document));
+            log.debug("Converted MAWM Asn , {}", JsonUtils.convert(mawmAsn));
             return mawmAsn;
         };
     }

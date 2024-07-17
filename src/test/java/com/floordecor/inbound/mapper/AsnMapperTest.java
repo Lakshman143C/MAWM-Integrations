@@ -50,7 +50,7 @@ public class AsnMapperTest {
 
         source.setAsnLines(asnLines);
 
-        Asn result= mapper.toMAWMItem(source);
+        Asn result= mapper.toMAWMAsn(source);
         assertNotNull(result);
         assertEquals("MMS000396935",result.getAsnId());
         assertEquals(false,result.isCanceled());

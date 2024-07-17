@@ -26,7 +26,7 @@ public interface AsnMapper {
         @Mapping(source = "containerNumber",target = "extendedAttributes.containerNumber",nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL),
         @Mapping(source = "asnLines", target = "asnLines")
     })
-    Asn toMAWMItem(MMSAsn source);
+    Asn toMAWMAsn(MMSAsn source);
     @Mapping(source = "asn.asnId", target = "asnId")
     AsnLineDto toASNLineDto(ASNLine asnLine);
     List<AsnLineDto> mapAsnLines(Set<ASNLine> asnLines); // Add this method to handle ASNLine mapping

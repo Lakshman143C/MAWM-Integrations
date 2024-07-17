@@ -28,25 +28,24 @@ CONSTRAINT unique_ConfigId_Key UNIQUE (config_id, property_key)
 INSERT INTO Custom_Prop_Config (config_id,property_key, property_value)
 SELECT * FROM (SELECT 'ASN', 'ActiveDCs', '991') AS tmp
 WHERE NOT EXISTS (
-    SELECT property_key FROM Custom_Prop_Config WHERE property_key = 'ActiveDCs'
+    SELECT config_id,property_key FROM Custom_Prop_Config WHERE property_key = 'ActiveDCs' and config_id='ASN'
 ) LIMIT 1;
 
 INSERT INTO Custom_Prop_Config (config_id,property_key, property_value)
 SELECT * FROM (SELECT 'ASN', 'EA', 'UNIT') AS tmp
 WHERE NOT EXISTS (
-    SELECT property_key FROM Custom_Prop_Config WHERE property_key = 'EA'
+    SELECT config_id,property_key FROM Custom_Prop_Config WHERE property_key = 'EA' and config_id='ASN'
 ) LIMIT 1;
-)
-engine=innodb;
 
 INSERT INTO Custom_Prop_Config (config_id,property_key, property_value)
-SELECT * FROM (SELECT 'PO_Config', 'ActiveDCs', '990') AS tmp
+SELECT * FROM (SELECT 'PO', 'ActiveDCs', '990') AS tmp
 WHERE NOT EXISTS (
-    SELECT property_key FROM Custom_Prop_Config WHERE property_key = 'ActiveDCs'
+    SELECT config_id,property_key FROM Custom_Prop_Config WHERE property_key = 'ActiveDCs' and config_id='PO'
 ) LIMIT 1;
+
 INSERT INTO Custom_Prop_Config (config_id,property_key, property_value)
-SELECT * FROM (SELECT 'PO_Config', 'EA', 'UNIT') AS tmp
+SELECT * FROM (SELECT 'PO', 'EA', 'UNIT') AS tmp
 WHERE NOT EXISTS (
-    SELECT property_key FROM Custom_Prop_Config WHERE property_key = 'EA'
+    SELECT config_id,property_key FROM Custom_Prop_Config WHERE property_key = 'EA' and config_id='PO'
 ) LIMIT 1;
 

@@ -8,10 +8,7 @@ import java.util.Map;
 public enum InterfaceTypes {
     Purchase_Order(PropertyConstants.PROP_MMS_PO),
     MMS_ASN(PropertyConstants.PROP_MMS_ASN),
-    BR_ASN(PropertyConstants.PROP_BR_ASN),
-    MMS_ASN_STAGE(PropertyConstants.PROP_MMS_ASN_STAGE),
-
-    BR_ASN_STAGE(PropertyConstants.PROP_BR_ASN_STAGE);
+    BR_ASN(PropertyConstants.PROP_BR_ASN);
     // Reverse-lookup map for getting a day from an abbreviation
 
     private static final Map<String, InterfaceTypes> lookup = new HashMap<>();

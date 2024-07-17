@@ -141,26 +141,26 @@ jobs:
           name: INB_ImportAsn_GCPQ
           headers:
             MSG_TYPE: INB_Asn
-    po:
-      job-name: item
-      type: BATCH
-      isEnabled: true
-      root-directory: /upload
-      drop-directory: /drop
-      chunk-size: 100
-      file-pattern: '*PO-*.csv'
-      maxFilesPerPoll: 3
-      pollFrequencyInSecond: 5
-      destination:
-        dest-type: SFTP
-        paths:
-          po:
-            path: /upload/MMMS_Po
-        queues:
-          mms-item:
-            name: INB_ImportItem_GCPQ
-            headers:
-              MSG_TYPE: INB_PO
+  po:
+    job-name: po
+    type: BATCH
+    isEnabled: true
+    root-directory: /upload
+    drop-directory: /drop
+    chunk-size: 100
+    file-pattern: '*PO-*.csv'
+    maxFilesPerPoll: 3
+    pollFrequencyInSecond: 5
+    destination:
+      dest-type: SFTP
+      paths:
+        po:
+          path: /upload/MMS_Po
+      queues:
+        mms-item:
+          name: INB_ImportItem_GCPQ
+          headers:
+            MSG_TYPE: INB_PO
 
 props:
   minimumLTLDeliverSize: 72

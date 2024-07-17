@@ -1,7 +1,8 @@
 package com.floordecor.inbound.integration;
 
+import com.floordecor.inbound.consts.EntityConstants;
 import com.floordecor.inbound.consts.PropertyConstants;
-import com.floordecor.inbound.customConfig.service.CustomPropConfigService;
+import com.floordecor.inbound.service.CustomPropConfigService;
 import com.floordecor.inbound.dto.enums.InterfaceTypes;
 import com.floordecor.inbound.dto.enums.Source;
 import com.supplychain.foundation.consts.JobConstants;
@@ -77,9 +78,9 @@ public class MMSPOIntegrationConfig {
 
     @Bean
     public SftpInboundFileSynchronizingMessageSource poSftpSource(
-            SftpInboundFileSynchronizer poInboundSftp) {
+            SftpInboundFileSynchronizer poSftpInboundSync) {
         return IntegrationUtils.inboundFileSftpSource(
-                poInboundSftp,
+                poSftpInboundSync,
                 jobProp.get(PropertyConstants.PROP_MMS_PO).getRootDirectory(),
                 jobProp.get(PropertyConstants.PROP_MMS_PO).getFilePattern(),
                 30L);
@@ -91,7 +92,7 @@ public class MMSPOIntegrationConfig {
 
     private static Map<String,String> props;
     public poFileToJobRequest poFileToJobRequest(){
-        props=configService.getConfigPropertiesByConfigId(PropertyConstants.PO_CONFIG_DB_PROP).getProperties();
+        props=configService.getConfigPropertiesByConfigId(EntityConstants.PO_CONFIG_DB_PROP).getProperties();
         poFileToJobRequest transformer=new poFileToJobRequest();
         transformer.setJob(mmsPOJob);
         transformer.setJobProp(jobProp);
@@ -132,7 +133,7 @@ public class MMSPOIntegrationConfig {
                     JobConstants.TRANSACTION_DATE,
                     DateUtils.getCurrentUTCTimeStampInString(DateUtils.LONG_DATE_FORMAT));
             jobParameters.addString(
-                    PropertyConstants.PO_CONFIG_DB_PROP,props.toString());
+                    EntityConstants.PO_CONFIG_DB_PROP,props.toString());
             LoggerUtils.setJobLogAttributes(JobUtils.getParametersMap(jobParameters));
             log.info("Triggering MMS po stage job, jobParam - {}", jobParameters.toJobParameters());
             return new JobLaunchRequest(job, jobParameters.toJobParameters());

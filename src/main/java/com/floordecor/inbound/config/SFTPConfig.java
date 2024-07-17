@@ -28,7 +28,6 @@ public class SFTPConfig {
         factory.setAllowUnknownKeys(true);
         return new CachingSessionFactory<>(factory, 10);
     }
-
     @Bean(name = "brAsnInboundSftp")
     public SessionFactory<SftpClient.DirEntry> brAsnInboundSftp() {
         SFTPProp.SFTPCred sftpCred = sftpProp.getInboundSftpCred("br_asn");
@@ -40,19 +39,6 @@ public class SFTPConfig {
         factory.setAllowUnknownKeys(true);
         return new CachingSessionFactory<>(factory, 10);
     }
-
-    @Bean(name = "asnOutboundSftp")
-    @ConditionalOnProperty("sftp.outbound.host")
-    public SessionFactory<SftpClient.DirEntry> asnOutboundSftp() {
-        DefaultSftpSessionFactory factory = new DefaultSftpSessionFactory(false);
-        factory.setHost(sftpProp.getOutbound().getHost());
-        factory.setPort(sftpProp.getOutbound().getPort());
-        factory.setUser(sftpProp.getOutbound().getUsername());
-        factory.setPassword(sftpProp.getOutbound().getPassword());
-        factory.setAllowUnknownKeys(true);
-        return new CachingSessionFactory<>(factory, 10);
-    }
-
     @Bean(name = "poInboundSftp")
     public SessionFactory<SftpClient.DirEntry> poInboundSftp() {
         SFTPProp.SFTPCred sftpCred =
@@ -65,10 +51,9 @@ public class SFTPConfig {
         factory.setAllowUnknownKeys(true);
         return new CachingSessionFactory<>(factory, 10);
     }
-
-    @Bean(name = "poOutboundSftp")
+    @Bean(name = "outboundSftp")
     @ConditionalOnProperty("sftp.outbound.host")
-    public SessionFactory<SftpClient.DirEntry> poOutboundSftp() {
+    public SessionFactory<SftpClient.DirEntry> asnOutboundSftp() {
         DefaultSftpSessionFactory factory = new DefaultSftpSessionFactory(false);
         factory.setHost(sftpProp.getOutbound().getHost());
         factory.setPort(sftpProp.getOutbound().getPort());
@@ -77,4 +62,5 @@ public class SFTPConfig {
         factory.setAllowUnknownKeys(true);
         return new CachingSessionFactory<>(factory, 10);
     }
+
 }

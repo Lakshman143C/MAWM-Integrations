@@ -87,7 +87,7 @@ public class MMSAsnMultiLineReader implements ItemStreamReader<MMSAsn> {
             MMSAsn asn = (MMSAsn) lineMappers.get(AsnConstants.ASN_HEADER).mapLine(line, rowNumber);
             Map<String, String> job_props=new HashMap<>();
             if(jobParameters!=null) {
-                job_props = utilService.convertStringToMap(jobParameters.get(EntityConstants.CONFIG_PROP));
+                job_props = utilService.convertStringToMap(jobParameters.get(EntityConstants.ASN_CONFIG_DB_PROP));
                 String activeFacilityIds = job_props.get("ActiveDCs");
                 if (!activeFacilityIds.contains(asn.getDestinationFacilityId()))
                     throw new Exception("Destination Facility Id is inactive!!");
@@ -122,7 +122,7 @@ public class MMSAsnMultiLineReader implements ItemStreamReader<MMSAsn> {
             }
             log.error(
                     "Error processing {} lines {} to {} starting at line {}:",
-                    InterfaceTypes.MMS_ASN_STAGE,
+                    InterfaceTypes.MMS_ASN,
                     startRowNumber,
                     rowNumber,
                     errorRowNumber);

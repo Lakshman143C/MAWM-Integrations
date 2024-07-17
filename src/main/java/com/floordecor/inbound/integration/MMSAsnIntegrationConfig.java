@@ -89,7 +89,7 @@ public class MMSAsnIntegrationConfig {
 
     private static Map<String,String> props;
     public mmsAsnFileToJobRequest mmsAsnFileMessageToJobRequest() {
-        CustomPropConfigDto dto= customPropConfigService.getConfigPropertiesByConfigId("ASN");
+        CustomPropConfigDto dto= customPropConfigService.getConfigPropertiesByConfigId(EntityConstants.ASN_CONFIG_DB_PROP);
         props=dto.getProperties();
         mmsAsnFileToJobRequest transformer = new mmsAsnFileToJobRequest();
         transformer.setJob(mmsAsnJob);
@@ -122,7 +122,7 @@ public class MMSAsnIntegrationConfig {
             jobParameters.addString(JobConstants.JOB_ID, StringUtils.getUniqueId());
             jobParameters.addString(JobConstants.INTERFACE_TYPE, InterfaceTypes.MMS_ASN.name());
             jobParameters.addString(JobConstants.SOURCE, Source.MMS.name());
-            jobParameters.addString(EntityConstants.CONFIG_PROP,props.toString());
+            jobParameters.addString(EntityConstants.ASN_CONFIG_DB_PROP,props.toString());
             jobParameters.addString(
                     JobConstants.ROOT_DIRECTORY,
                     jobProp.get(PropertyConstants.PROP_MMS_ASN).getRootDirectory()

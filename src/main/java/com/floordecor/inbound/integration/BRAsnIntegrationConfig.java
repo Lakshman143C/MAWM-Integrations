@@ -89,7 +89,7 @@ public class BRAsnIntegrationConfig {
 
     private static Map<String,String> props;
     public brAsnFileToJobRequest brAsnFileMessageToJobRequest() {
-        CustomPropConfigDto dto= customPropConfigService.getConfigPropertiesByConfigId("ASN");
+        CustomPropConfigDto dto= customPropConfigService.getConfigPropertiesByConfigId(EntityConstants.ASN_CONFIG_DB_PROP);
         props=dto.getProperties();
         brAsnFileToJobRequest transformer = new brAsnFileToJobRequest();
         transformer.setJob(brAsnJob);
@@ -121,7 +121,7 @@ public class BRAsnIntegrationConfig {
             jobParameters.addString(JobConstants.JOB_ID, StringUtils.getUniqueId());
             jobParameters.addString(JobConstants.INTERFACE_TYPE, InterfaceTypes.BR_ASN.name());
             jobParameters.addString(JobConstants.SOURCE, Source.BR.name());
-            jobParameters.addString(EntityConstants.CONFIG_PROP,props.toString());
+            jobParameters.addString(EntityConstants.ASN_CONFIG_DB_PROP,props.toString());
             jobParameters.addString(
                     JobConstants.ROOT_DIRECTORY,
                     jobProp.get(PropertyConstants.PROP_BR_ASN).getRootDirectory()

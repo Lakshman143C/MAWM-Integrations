@@ -19,8 +19,8 @@ public class MMSAsnProcessor {
             asn.addReference();
             if(asn.getContainerNumber()==null)
                 asn.setContainerNumber(null);
-            Asn mawmAsn= asnMapper.toMAWMItem(asn);
-            log.debug("Converted MAWM Item , {}", JsonUtils.convert(mawmAsn));
+            Asn mawmAsn= asnMapper.toMAWMAsn(asn);
+            log.debug("Converted MAWM Asn , {}", JsonUtils.convert(mawmAsn));
             return mawmAsn;
         };
     }

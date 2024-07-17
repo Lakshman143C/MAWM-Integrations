@@ -1,8 +1,8 @@
 package com.floordecor.inbound.reader;
 
+import com.floordecor.inbound.consts.EntityConstants;
 import com.floordecor.inbound.consts.POConstants;
-import com.floordecor.inbound.consts.PropertyConstants;
-import com.floordecor.inbound.customConfig.service.CustomPropConfigService;
+import com.floordecor.inbound.service.CustomPropConfigService;
 import com.floordecor.inbound.dto.enums.InterfaceTypes;
 import com.floordecor.inbound.dto.mms.MMSPO;
 import com.floordecor.inbound.dto.mms.MMSPOLine;
@@ -73,7 +73,7 @@ public class MMSPOMultiLineReader implements ItemStreamReader<MMSPO> {
         }
         try {
             MMSPO po = (MMSPO) lineMappers.get(POConstants.PO_HEADER).mapLine(line, rowNumber);
-            Map<String,String> props= Utils.convertStringToMap(jobParameters.get(PropertyConstants.PO_CONFIG_DB_PROP));
+            Map<String,String> props= Utils.convertStringToMap(jobParameters.get(EntityConstants.PO_CONFIG_DB_PROP));
             String activeDestinationFacilityIds=props.get("ActiveDCs");
             if(!activeDestinationFacilityIds.contains(po.getDestinationFacilityId()))
                 throw new Exception("Destination Facility Id is inactive!!");

@@ -1,5 +1,6 @@
 package com.floordecor.inbound.init;
 
+import com.floordecor.inbound.mapper.POCustomMapping;
 import com.google.cloud.spring.pubsub.core.PubSubTemplate;
 import com.supplychain.foundation.batch.integration.SftpMessagingGateway;
 import com.supplychain.foundation.batch.listener.CommonListener;
@@ -29,6 +30,10 @@ public class CommonBeanInit {
     public CommonListener commonListener() {
         return new CommonListener();
     }
+    @Bean
+    POCustomMapping getMapping(){
+        return new POCustomMapping();
+    }
 
     @Bean
     public MessagingService messingService(
@@ -52,27 +57,27 @@ public class CommonBeanInit {
     @Configuration
     public static class SftpOutboundConfig {
         @Bean
-        @DependsOn({"asnOutboundSftp"})
+        @DependsOn({"outboundSftp"})
         @ServiceActivator(inputChannel = "sftpFileOutboundMover")
         public MessageHandler sftpFileMoveOutboundHandler(
-                SessionFactory<SftpClient.DirEntry> asnOutboundSftp) {
-            return IntegrationUtils.sftpFileMoveHandler(asnOutboundSftp);
+                SessionFactory<SftpClient.DirEntry> outboundSftp) {
+            return IntegrationUtils.sftpFileMoveHandler(outboundSftp);
         }
 
         @Bean
-        @DependsOn({"asnOutboundSftp"})
+        @DependsOn({"outboundSftp"})
         @ServiceActivator(inputChannel = "sftpFileOutboundUpload")
         public MessageHandler sftpFileUploadOutboundHandler(
-                SessionFactory<SftpClient.DirEntry> asnOutboundSftp) {
-            return IntegrationUtils.sftpFileUploadHandler(asnOutboundSftp);
+                SessionFactory<SftpClient.DirEntry> outboundSftp) {
+            return IntegrationUtils.sftpFileUploadHandler(outboundSftp);
         }
 
         @Bean
-        @DependsOn({"asnOutboundSftp"})
+        @DependsOn({"outboundSftp"})
         @ServiceActivator(inputChannel = "sftpFileOutboundCreate")
         public MessageHandler sftpFileCreateOutboundHandler(
-                SessionFactory<SftpClient.DirEntry> asnOutboundSftp) {
-            return IntegrationUtils.sftpFileCreateHandler(asnOutboundSftp);
+                SessionFactory<SftpClient.DirEntry> outboundSftp) {
+            return IntegrationUtils.sftpFileCreateHandler(outboundSftp);
         }
 
         @Bean
@@ -94,5 +99,6 @@ public class CommonBeanInit {
                     @Header(FileHeaders.REMOTE_DIRECTORY) String remoteDirectory,
                     @Header(FileHeaders.FILENAME) String fileName);
         }
+
     }
 }
