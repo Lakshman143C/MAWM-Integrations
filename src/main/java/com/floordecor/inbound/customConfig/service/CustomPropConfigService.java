@@ -1,10 +1,12 @@
-package com.floordecor.inbound.service;
+package com.floordecor.inbound.customConfig.service;
 
-import com.floordecor.inbound.dto.prop.CustomPropConfigDto;
-import com.floordecor.inbound.entity.prop.CustomPropConfig;
-import com.floordecor.inbound.repository.CustomPropConfigRepository;
+
 import java.util.*;
 import java.util.stream.Collectors;
+
+import com.floordecor.inbound.customConfig.dto.CustomPropConfigDto;
+import com.floordecor.inbound.customConfig.entity.CustomPropConfig;
+import com.floordecor.inbound.customConfig.repository.CustomPropConfigRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -2,7 +2,7 @@ package com.floordecor.inbound.reader;
 
 import com.floordecor.inbound.consts.EntityConstants;
 import com.floordecor.inbound.consts.POConstants;
-import com.floordecor.inbound.service.CustomPropConfigService;
+import com.floordecor.inbound.customConfig.service.CustomPropConfigService;
 import com.floordecor.inbound.dto.enums.InterfaceTypes;
 import com.floordecor.inbound.dto.mms.MMSPO;
 import com.floordecor.inbound.dto.mms.MMSPOLine;

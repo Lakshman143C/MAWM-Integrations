@@ -3,7 +3,6 @@ package com.floordecor.inbound.processor;
 
 import com.supplychain.mawm.dto.po.MAWMPO;
 import com.floordecor.inbound.dto.mms.MMSPO;
-import com.floordecor.inbound.dto.prop.PoProps;
 import com.floordecor.inbound.mapper.POCustomMapping;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,7 +28,6 @@ import static org.mockito.Mockito.when;
 class MMSPOProcessorTest {
 
     @InjectMocks MMSPOProcessor mmspoProcessor;
-    @Mock private PoProps props;
     @Mock private POCustomMapping poCustomMapping;
     private MMSPO mmspo;
     private MAWMPO mawmpo;

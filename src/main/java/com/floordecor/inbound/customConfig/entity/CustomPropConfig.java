@@ -1,6 +1,7 @@
-package com.floordecor.inbound.entity.prop;
+package com.floordecor.inbound.customConfig.entity;
 
 import com.floordecor.inbound.consts.EntityConstants;
+import com.floordecor.inbound.entity.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,7 +17,7 @@ import lombok.*;
                     name = "unique_ConfigId_Key",
                     columnNames = {"config_Id", "property_key"})
         })
-public class CustomPropConfig {
+public class CustomPropConfig extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

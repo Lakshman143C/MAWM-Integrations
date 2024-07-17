@@ -18,6 +18,10 @@ CREATE TABLE IF NOT EXISTS inb_transaction_status
 CREATE TABLE IF NOT EXISTS Custom_Prop_Config
 (
 id BIGINT auto_increment NOT NULL,
+created_timestamp DATETIME NULL,
+last_updated_timestamp DATETIME NULL,
+created_by VARCHAR(50) NULL,
+updated_by VARCHAR(50) NULL,
 config_id VARCHAR(50) NULL,
 property_key VARCHAR(50) NULL,
 property_value VARCHAR(1000) NULL,

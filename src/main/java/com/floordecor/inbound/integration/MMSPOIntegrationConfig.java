@@ -2,7 +2,7 @@ package com.floordecor.inbound.integration;
 
 import com.floordecor.inbound.consts.EntityConstants;
 import com.floordecor.inbound.consts.PropertyConstants;
-import com.floordecor.inbound.service.CustomPropConfigService;
+import com.floordecor.inbound.customConfig.service.CustomPropConfigService;
 import com.floordecor.inbound.dto.enums.InterfaceTypes;
 import com.floordecor.inbound.dto.enums.Source;
 import com.supplychain.foundation.consts.JobConstants;

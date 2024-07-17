@@ -1,10 +1,12 @@
-package com.floordecor.inbound.repository;
+package com.floordecor.inbound.customConfig.repository;
 
-import com.floordecor.inbound.entity.prop.CustomPropConfig;
-import java.util.List;
-import java.util.Optional;
+
+import com.floordecor.inbound.customConfig.entity.CustomPropConfig;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CustomPropConfigRepository extends JpaRepository<CustomPropConfig, String> {

@@ -1,7 +1,8 @@
-package com.floordecor.inbound.controller;
+package com.floordecor.inbound.customConfig.controller;
 
-import com.floordecor.inbound.dto.prop.CustomPropConfigDto;
-import com.floordecor.inbound.service.CustomPropConfigService;
+
+import com.floordecor.inbound.customConfig.dto.CustomPropConfigDto;
+import com.floordecor.inbound.customConfig.service.CustomPropConfigService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
